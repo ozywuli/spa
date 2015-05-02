@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+
+
+// the anonymous function isn't stored in the prison variable because the anonymous function was executed--the return value of the anonymous function is stored in the prison variable
+
+var prison = (function() {
+  var prisoner_name  = 'Mike Mikowski';
+  var jail_term = '20 year term';
+
+  return {
+    prisoner: prisoner_name + ' - ' + jail_term,
+    sentence: jail_term
+  }
+})();
+
+// this is undefined, no prisoner_name for you.
+console.log( prison.prisoner_name );
+
+// this outputs 'Mike Mikowski - 20 year term';
+console.log(prison.prisoner);
+// this out puts 20 year term
+console.log(prison.sentence);
+
+
+// one problem is that we can't access and change prisoner_name and jail_term
+
+
+// outputs undefined
+console.log(prison.jail_term);
+
+// the prison function is an object so I can still define a new jail_term for it
+prison.jail_term = 'Sentence commuted';
+
+// logs sentence commmuted
+console.log(prison.jail_term);
+
+// but prison.prisoner still won't be updated
+console.log(prison.prisoner);
+
+
+
+
+// to make the vars in execution context update, we have to turn the the attributes into methods that access the variables every time they're invoked
+var prison = (function() {
+
+var prisoner_name = 'Mike Mikowski';
+var jail_term = '20 year term';
+
+return {
+  prisoner: function() {
+    return prisoner_name + ' - ' + jail_term;
+  },
+  setJailTerm: function( term ) {
+    jail_term = term;
+  }
+}
+
+})();
+
+// this outputs 'Mike Mikowski - 20 year term'
+console.log(prison.prisoner());
+
+// this outputs 'Mike Mikwski - Sentence commuted'
+prison.setJailTerm( 'Sentence commuted' );
+
+
+</script>
+</body>
+</html>

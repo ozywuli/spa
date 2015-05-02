@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+
+// object literal
+var proto = {
+  sentence: 4,
+  probation: 2
+};
+
+// factory function
+var makePrisoner = function( name, id ) {
+
+  // Object.create
+  var prisoner = Object.create(proto);
+  prisoner.name = name;
+  prisoner.id = id;
+
+  return prisoner;
+};
+
+var firstPrisoner = makePrisoner('Joe', '12A');
+
+// overwriting the prototype
+firstPrisoner.sentence = 10;
+
+// logs 10 instead of 4
+console.log(firstPrisoner.sentence);
+
+// logs 4
+console.log(firstPrisoner.__proto__.sentence);
+
+var secondPrisoner = makePrisoner('Sam', '2BC');
+
+// delete the attribute from the object
+delete firstPrisoner.sentence;
+// logs 4
+console.log(firstPrisoner.sentence);
+
+// logs the entire object, including properties of the prototype
+console.log(firstPrisoner);
+
+// logs just the prototype properties
+console.log(firstPrisoner.__proto__);
+
+// logs the generic prototype
+console.log(firstPrisoner.__proto__.__proto__);
+
+// generic prorotype has no prototype
+// null
+console.log(firstPrisoner.__proto__.__proto__.__proto__);
+
+// prototype mutation
+proto.sentence = 5;
+console.log(firstPrisoner.sentence);
+console.log(secondPrisoner.sentence);
+
+
+
+// error
+console.log(firstPrisoner.__proto__.__proto__.__proto__.__proto__);
+
+
+</script>
+
+</body>
+</html>
