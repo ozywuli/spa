@@ -4,19 +4,42 @@
   <meta charset="UTF-8">
   <title>SPA Chapter 1 section 1.2.4</title>
 
-  <link rel="stylesheet" href="css/style.css">
+
+<script src="js/jquery.js"></script>
+<script src="js/urianchor.js"></script>
+<script src="js/spa.js"></script>
+<script src="js/spa.shell.js"></script>
+
+<script>
+$(function() {
+
+  spa.initModule( $('#spa') );
+
+  spa.test(1);
+
+  console.log(spa);
+
+});
+
+</script>
+
+
+  <link rel="stylesheet" href="css/spa.css">
+  <link rel="stylesheet" href="css/spa.shell.css">
 
 
 
 </head>
+
+
 <body>
 
 
 
 <div id="spa"></div>
 
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
+
+
 
 </body>
 </html>
